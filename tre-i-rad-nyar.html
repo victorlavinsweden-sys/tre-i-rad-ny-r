@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="sv">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>Tre i rad nyår</title>
+  <style>
+    html, body { height: 100%; margin: 0; }
+    body {
+      background: radial-gradient(circle at 20% 10%, #102a43, #0b1d2a 60%, #06131c);
+      color: #fff;
+      font-family: -apple-system, system-ui, Segoe UI, Roboto, Arial, sans-serif;
+      overflow: hidden;
+    }
+
+    .wrap{
+      min-height: 100vh;
+      padding: 24px;
+      box-sizing: border-box;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      justify-content: center;
+      gap: 18px;
+      text-align: right;
+    }
+
+    h1{
+      margin: 0;
+      font-size: 40px;
+      letter-spacing: 0.2px;
+      text-shadow: 0 8px 30px rgba(0,0,0,0.35);
+    }
+
+    .subtitle{
+      margin: 0;
+      opacity: 0.9;
+      font-size: 16px;
+    }
+
+    button{
+      font-size: 24px;
+      font-weight: 800;
+      padding: 16px 26px;
+      border: 0;
+      border-radius: 16px;
+      background: linear-gradient(135deg, #ffd000, #ff8a00);
+      color: #1b1b1b;
+      box-shadow: 0 14px 30px rgba(0,0,0,0.35);
+      cursor: pointer;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    #result{
+      font-size: 120px;
+      font-weight: 900;
+      line-height: 1;
+      background: linear-gradient(180deg, #66ffe3, #00d4ff);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      text-shadow: 0 10px 30px rgba(0,0,0,0.25);
+    }
+
+    .confetti{
+      position: fixed;
+      top: -12px;
+      width: 10px;
+      height: 14px;
+      opacity: 0.95;
+      border-radius: 3px;
+      pointer-events: none;
+      animation-name: fall, spin;
+      animation-timing-function: linear, linear;
+      animation-iteration-count: 1, 1;
+    }
+
+    @keyframes fall{
+      to { transform: translateY(110vh); }
+    }
+    @keyframes spin{
+      to { transform: translateY(110vh) rotate(720deg); }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <h1>Tre i rad nyår 🎆🎆🎆</h1>
+    <p class="subtitle">Tryck för att få 1, 2 eller 3</p>
+    <button onclick="roll()">Slå</button>
+    <div id="result">?</div>
+  </div>
+
+  <script>
+    function roll() {
+      const n = Math.floor(Math.random() * 3) + 1;
+      document.getElementById("result").textContent = n;
+      confetti(45);
+    }
+
+    function confetti(count) {
+      for (let i = 0; i < count; i++) {
+        const c = document.createElement("div");
+        c.className = "confetti";
+        c.style.left = (Math.random() * 100) + "vw";
+        c.style.background = "hsl(" + (Math.random() * 360) + ", 100%, 55%)";
+        c.style.animationDuration = (1.0 + Math.random() * 1.2) + "s";
+        c.style.transform = "translateY(0) rotate(" + (Math.random() * 360) + "deg)";
+        document.body.appendChild(c);
+        setTimeout(() => c.remove(), 1800);
+      }
+    }
+  </script>
+</body>
+</html>
